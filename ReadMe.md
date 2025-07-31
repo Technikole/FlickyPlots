@@ -1,5 +1,19 @@
 # FlickyPlots
 
+## Welcome FlickyPlots:
+[How to Video]
+
+<iframe width="700px" height="400px" 
+      src="https://embed.app.guidde.com/playbooks/317zRdT599YfsrfcvADZmo"
+      title="Welcome to FlickyPlots"
+      frameborder="0"
+      referrerpolicy="unsafe-url"
+      allowfullscreen="true"
+      allow="clipboard-write"
+      sandbox="allow-popups allow-popups-to-escape-sandbox allow-scripts allow-forms allow-same-origin allow-presentation" style="border-radius: 10px">
+</iframe>
+
+
 ## 🗺️ Project Overview
 
 FlickyPlots is an innovative hackathon project that seamlessly blends AI, culture, and travel by connecting the world of cinema with real-world locations. Leveraging the power of Google Maps Platform and Gemini AI, FlickyPlots transforms a simple map into a dynamic discovery tool for movie enthusiasts and curious travelers alike.
