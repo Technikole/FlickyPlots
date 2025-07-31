@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "apis": [
+    {
+      "identifier": "qloo",
+      "source": "@qloo/v1.0.0#ivg1jhhmdghvw8z",
+      "integrity": "sha512-DNx98vXLuZVY8+z78tV6QBbZvKxDkUCRTglNFNnSh5fLoxLYI6uauAakRKcwD0cBtlZvi1fSqcDNKm7NWNF6og==",
+      "installerVersion": "6.1.3"
+    }
+  ]
+}

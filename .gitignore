@@ -1,5 +1,56 @@
-# Ignore environment variables file
+# Node dependencies
+node_modules/
+
+# Dev Notes
+
+# My files to ignore
+ideas.md 
+_dev_notes/
+_archive [delete]/
+dev-notes.md
+lootx stack sop.txt
+retained HOME. html
+eventbrite-instructions.md
+layouts_partials/dnu-insert.html
+tailwind.config.txt
+pglite-debug.log
+_clean-up I
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
 .env
 
-# Other common ignores...
-    
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor specific
+.vscode/
+
+# From Firebase .gitignore
+logs
+firebase-debug.log*
+firebase-debug.*.log*
+.firebase/
+pids
+*.pid
+*.seed
+*.pid.lock
+lib-cov
+coverage
+.nyc_output
+.grunt
+bower_components
+.lock-wscript
+build/Release
+.npm
+.eslintcache
+.node_repl_history
+*.tgz
+.yarn-integrity
+.dataconnect

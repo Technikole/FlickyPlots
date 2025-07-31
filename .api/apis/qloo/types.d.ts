@@ -1,0 +1,14 @@
+import type { FromSchema } from 'json-schema-to-ts';
+import * as schemas from './schemas';
+export type GetAudienceTypesMetadataParam = FromSchema<typeof schemas.GetAudienceTypes.metadata>;
+export type GetAudienceTypesResponse200 = FromSchema<typeof schemas.GetAudienceTypes.response['200']>;
+export type GetAudiencesMetadataParam = FromSchema<typeof schemas.GetAudiences.metadata>;
+export type GetAudiencesResponse200 = FromSchema<typeof schemas.GetAudiences.response['200']>;
+export type GetInsightsMetadataParam = FromSchema<typeof schemas.GetInsights.metadata>;
+export type GetInsightsResponse200 = FromSchema<typeof schemas.GetInsights.response['200']>;
+export type GetTagTypesMetadataParam = FromSchema<typeof schemas.GetTagTypes.metadata>;
+export type GetTagTypesResponse200 = FromSchema<typeof schemas.GetTagTypes.response['200']>;
+export type GetTagsMetadataParam = FromSchema<typeof schemas.GetTags.metadata>;
+export type GetTagsResponse200 = FromSchema<typeof schemas.GetTags.response['200']>;
+export type GetTrendingMetadataParam = FromSchema<typeof schemas.GetTrending.metadata>;
+export type GetTrendingResponse200 = FromSchema<typeof schemas.GetTrending.response['200']>;

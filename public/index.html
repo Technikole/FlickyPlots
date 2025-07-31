@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlickyPlots</title>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/12.0.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/12.0.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/12.0.0/firebase-storage-compat.js"></script>
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Orbitron:wght@400..900&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+ <link href="./output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">FlickyPlots 🗺️</h1>
+            <p class="text-gray-600 mt-1">Discover Where Your Favorite Movies Were Filmed</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 mt-6">
+
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden p-6 mb-8">
+             <h2 class="text-2xl font-semibold mb-4">Filming Locations Map</h2>
+            <div id="map" class="w-full h-full rounded-lg border border-gray-200"></div>
+        </div>
+
+        <div id="movie-table" class="bg-white rounded-xl shadow-lg overflow-hidden p-6">
+            </div>
+    </main>
+
+    <footer class="text-center py-8 text-gray-500 text-sm">
+        <p>Built for the Qloo & Google Maps Platform Hackathons.</p>
+        <div>© 2025 FlickyPlots by Technikole. All rights reserved.</div>
+    </footer>
+
+    <script src="./app.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgreUQG6YFc0uFiCvQ0vETOR2MrxgbPhY&callback=initMap&libraries=geocoding" defer></script>
+
+</body>
+</html>
