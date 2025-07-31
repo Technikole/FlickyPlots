@@ -8,10 +8,6 @@
     ],
     "rewrites": [
       {
-        "source": "/qlooProxy",
-        "function": "qlooProxy"
-      },
-      {
         "source": "/getQloo",
         "function": "getQloo"
       },

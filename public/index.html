@@ -17,34 +17,75 @@
     rel="stylesheet">
  <link href="./output.css" rel="stylesheet">
 </head>
+
 <body class="bg-gray-50 text-gray-800">
 
-    <header class="bg-white shadow-md">
-        <div class="container mx-auto px-4 py-4">
-            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">FlickyPlots 🗺️</h1>
-            <p class="text-gray-600 mt-1">Discover Where Your Favorite Movies Were Filmed</p>
-        </div>
+    <header class="bg-white shadow-md sticky top-0 z-20">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-900 tracking-tight">FlickyPlots 🗺️</h1>
+            <button id="about-button" class="px-4 py-2 bg-orange-400 text-white rounded-3xl hover:bg-green-300 transition">About</button>
+        </nav>
     </header>
-
     <main class="container mx-auto p-4 mt-6">
-
+       
         <div class="bg-white rounded-xl shadow-lg overflow-hidden p-6 mb-8">
              <h2 class="text-2xl font-semibold mb-4">Filming Locations Map</h2>
+              <p class=" text-gray-600 mb-6">
+📍 Click a location or movie title to uncover behind-the-scenes stories — powered by Gemini AI.
+        </p>
             <div id="map" class="w-full h-full rounded-lg border border-gray-200"></div>
         </div>
-
         <div id="movie-table" class="bg-white rounded-xl shadow-lg overflow-hidden p-6">
             </div>
     </main>
 
-    <footer class="text-center py-8 text-gray-500 text-sm">
-        <p>Built for the Qloo & Google Maps Platform Hackathons.</p>
+    <footer class="text-center py-8 text-gray-500 text-sm mt-8 border-t">
+        <div class="mb-6">
+            <h3 class="text-lg font-semibold text-gray-700">Created By:</h3><br>
+         
+            <div class="flex justify-center items-center gap-4 mb-5">
+                <img src="https://cdn.technikole.com/_official/nikole-2025.png  " alt="FlickyPlots Created by NiKole Maxwell for the Qloo and Google Maps Hackathon 2025" class="w-30 h-auto rounded-full">
+                <img src="https://cdn.technikole.com/_official/technikole_logo_lrg_blk_trans_25.png" alt="Supported by  Technikole Logo" class="h-30 w-auto">
+                 
+            </div>
+          <a class="font-bold " href="https://linkedin.com/in/nikolemaxwell" target="_blank" rel="noopener noreferrer">
+  <h4 class="font-bold tracking-wider">NiKole "Technikole" Maxwell</h4>
+</a>
+
+        </div>
+        
+        <div class="mb-4">
+            <h3 class="text-lg font-semibold text-gray-700 mb-3">Powered By</h3>
+            <div class="flex justify-center items-center gap-6">
+                <img src="https://cdn.technikole.com/images/google_maps_logo_icon_171055.png" alt="Google Maps Platform Logo" class="h-20 w-auto">
+                <img src="https://cdn.technikole.com/images/Qloo logo.jpg" alt="Qloo Logo" class="h-20 w-auto">
+                <img src="https://cdn.technikole.com/images/gemini.png" alt="Gemini Logo" class="h-20 w-auto">
+            </div>
+        </div>
+        
         <div>© 2025 FlickyPlots by Technikole. All rights reserved.</div>
     </footer>
+
+    <div id="about-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-30">
+        <div class="bg-white rounded-lg shadow-2xl p-6 w-full max-w-lg">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold">About FlickyPlots</h2>
+                <button id="close-modal-button" class="text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+            <p class="text-gray-700 text-xl">
+                FlickyPlots is a hackathon project designed to explore the intersection of culture, location, and artificial intelligence. By leveraging Qloo's cultural data API, we identify movies and their real-world filming locations. These are then plotted on an interactive map using the Google Maps Platform.
+            </p>
+            <p class="text-gray-700 mt-4 text-xl">
+                The magic happens when you click on a location. We use Google's Gemini AI to generate a unique, cinematic "travelers experience" inviting you to "imagine" being on location, turning a simple map into a creative discovery tool for movie lovers and travelers alike.
+            </p>
+            
+            <h4 class=" text-center font-bold text-green-500 mt-4"> Created for movie lovers and travelers alike! </h4>
+        </div>
+    </div>
+
 
     <script src="./app.js"></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgreUQG6YFc0uFiCvQ0vETOR2MrxgbPhY&callback=initMap&libraries=geocoding&map_ids=93c2d724f0e150fab9fcbd41" defer></script>
-
 </body>
-</html>
+</html>  
