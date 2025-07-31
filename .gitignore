@@ -1,6 +1,6 @@
 # Node dependencies
 node_modules/
-
+functions/node_modules/
 # Dev Notes
 
 # My files to ignore
@@ -16,6 +16,8 @@ tailwind.config.txt
 pglite-debug.log
 _clean-up I
 
+functions/.env.flickyplots
+functions/.env
 # Log files
 *.log
 npm-debug.log*
