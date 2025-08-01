@@ -11,6 +11,7 @@ function initMap() {
         heading: 0,
         mapTypeControlOptions: {
             mapTypeIds: ["roadmap", "satellite"],
+            
         },
     });
     fetchAndProcessMovies(map);

@@ -13,7 +13,7 @@ We identify movies and their actual filming locations using Qloo's cultural data
 
 **Designed for the Qloo hackathon** we integrate couplings of books and albums to accompany the destination.*
 
-### Deployed Application: [https://flickyplots--qloo-preview-18e1qo9q.web.app](https://flickyplots--qloo-preview-18e1qo9q.web.app/)
+### Deployed Application: [FlickyPlots Enhanced Version](https://flickyplots-qloo.web.app/)
 
 ### ✨ Features
 
