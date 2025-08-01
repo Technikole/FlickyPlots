@@ -13,7 +13,7 @@ We identify movies and their actual filming locations using Qloo's cultural data
 
 **Designed for the Qloo hackathon** we integrate couplings of books and albums to accompany the destination.*
 
-### Deployed Application: flickyplots.firebaseapp.com
+### Deployed Application: [https://flickyplots--qloo-preview-18e1qo9q.web.app](https://flickyplots--qloo-preview-18e1qo9q.web.app/)
 
 ### ✨ Features
 
@@ -41,6 +41,10 @@ We solve this by:
   - Creating Immersive Experiences: Using AI to generate rich, descriptive narratives that make locations come alive, going beyond simple facts.
 
   - Encouraging Exploration: Inspiring users to virtually (and perhaps physically!) visit these cinematic landmarks, transforming passive viewing into active engagement.
+
+  - What to bring - a book, soundtrack? What is the perfect pairing for your destination.
+
+ ** Bonus Preview ** what we did for the Google Hackathon: FlickyPlots.web.app
 
 ### 🛠️ Technologies Used
 
