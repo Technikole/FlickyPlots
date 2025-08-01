@@ -7,6 +7,12 @@
       "hosting": {
         "flickyplots": [
           "flickyplots"
+        ],
+        "flickyplots-qloo": [
+          "flickyplots-qloo"
+        ],
+        "apocalypse": [
+          "flickyplots-apocalypse"
         ]
       }
     }

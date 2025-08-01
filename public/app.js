@@ -29,7 +29,7 @@ function panToMarker(title) {
 
 async function fetchAndProcessMovies(map) {
     try {
-        const response = await fetch('/getQloo');
+        const response = await fetch('/getApocalypseMovies');
         if (!response.ok) throw new Error(`Network response was not ok`);
         const movies = await response.json();
         plotMoviesOnMap(movies, map);

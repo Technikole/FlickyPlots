@@ -15,6 +15,7 @@ layouts_partials/dnu-insert.html
 tailwind.config.txt
 pglite-debug.log
 _clean-up I
+removed firebase-json
 
 functions/.env.flickyplots
 functions/.env

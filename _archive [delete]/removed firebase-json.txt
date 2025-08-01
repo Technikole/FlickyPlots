@@ -10,22 +10,27 @@
       ]
     },
     {
-      "target": "flickyplots-qloo",
+      "target": "qloo-site",
       "public": "public",
       "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
       "rewrites": [
         { "source": "/getQloo", "function": "getQloo" },
         { "source": "/getAiTourGuide", "function": "getAiTourGuide" }
       ]
-    },
-       {
-      "target": "apocalypse",
-      "public": "public",
-      "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
-      "rewrites": []
     }
   ],
   "functions": {
-    "source": "functions"
+    "source": "functions",
+    "codebase": "default",
+    "ignore": [
+      "node_modules",
+      ".git",
+      "firebase-debug.log",
+      "firebase-debug.*.log",
+      "*.local"
+    ]
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }
