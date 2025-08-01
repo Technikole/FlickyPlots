@@ -18,11 +18,21 @@
         { "source": "/getAiTourGuide", "function": "getAiTourGuide" }
       ]
     },
+
        {
       "target": "apocalypse",
       "public": "public",
       "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
       "rewrites": []
+    },
+    {
+      "target": "apocalypse",
+      "public": "public",
+      "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
+      "rewrites": [
+        { "source": "/getApocalypseMovies", "function": "getApocalypseMovies" },
+        { "source": "/getAiTourGuide", "function": "getAiTourGuide" } 
+      ]
     }
   ],
   "functions": {
