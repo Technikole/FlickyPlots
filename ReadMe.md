@@ -1,24 +1,17 @@
 # FlickyPlots
 
 ## Welcome FlickyPlots:
-[How to Video]
-
-<iframe width="700px" height="400px" 
-      src="https://embed.app.guidde.com/playbooks/317zRdT599YfsrfcvADZmo"
-      title="Welcome to FlickyPlots"
-      frameborder="0"
-      referrerpolicy="unsafe-url"
-      allowfullscreen="true"
-      allow="clipboard-write"
-      sandbox="allow-popups allow-popups-to-escape-sandbox allow-scripts allow-forms allow-same-origin allow-presentation" style="border-radius: 10px">
-</iframe>
+[How to Video](https://app.guidde.com/share/playbooks/317zRdT599YfsrfcvADZmo?origin=RBkOiYomNIgQikxREh4L1pY7rc23)
 
 
 ## 🗺️ Project Overview
 
 FlickyPlots is an innovative hackathon project that seamlessly blends AI, culture, and travel by connecting the world of cinema with real-world locations. Leveraging the power of Google Maps Platform and Gemini AI, FlickyPlots transforms a simple map into a dynamic discovery tool for movie enthusiasts and curious travelers alike.
 
+
 We identify movies and their actual filming locations using Qloo's cultural data API, then plot these points on an interactive map. The real magic unfolds when you click on a location: Google's Gemini 1.5 Pro AI generates a unique, cinematic "traveler's experience," inviting you to "imagine" being right there on set.
+
+**Designed for the Qloo hackathon** we integrate couplings of books and albums to accompany the destination.*
 
 ### Deployed Application: flickyplots.firebaseapp.com
 

@@ -18,6 +18,7 @@ _clean-up I
 
 functions/.env.flickyplots
 functions/.env
+
 # Log files
 *.log
 npm-debug.log*

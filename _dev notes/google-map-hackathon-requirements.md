@@ -444,6 +444,7 @@ For questions, send an email to support@devpost.com.
 
 Entrant acknowledges and agrees that Sponsor may collect, store, share with DevPost, and otherwise use personally identifiable information provided during the registration process and the contest, including, but not limited to, name, mailing address, phone number, and email address. Sponsor will use this information in accordance with its Privacy Policy (http://www.google.com/policies/privacy/).
 
+
 Entrant’s information may be transferred to countries outside the country of entrant’s residence, including the United States.  Such other countries may not have privacy laws and regulations similar to those of the country of entrant’s residence.
 
  Entrant has the right to request access, review, rectification or deletion of personal data collected by Google in connection with the Contest by writing to Google at this email address ahsanashraf@google.com.

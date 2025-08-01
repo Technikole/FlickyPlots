@@ -122,18 +122,35 @@ function plotMoviesOnMap(movies, map) {
     });
 }
 
+// For Qloo Hackathon 
+
 async function fetchAiGuide(movie) {
     try {
         const response = await fetch('/getAiTourGuide', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: movie.title, location: movie.filmingLocation }),
+            body: JSON.stringify({
+                title: movie.title,
+                location: movie.filmingLocation,
+                releaseYear: movie.releaseYear
+            }),
         });
         if (!response.ok) throw new Error('AI response not ok');
-        const data = await response.json();
+        const data = await response.json(); // Data is now an object { book, album, pitch }
+
         const aiContentDiv = document.getElementById('ai-content');
         if (aiContentDiv) {
-            aiContentDiv.innerHTML = `<p class="text-sm text-gray-800">${data.tourGuideText}</p>`;
+            // NEW HTML STRUCTURE with Tailwind classes
+            const newHtml = `
+                <h4 class="font-semibold text-sm mt-2 text-gray-800">Cultural Pairings</h4>
+                <ul class="list-disc list-inside text-sm text-gray-600 mt-1 space-y-1">
+                    <li><strong>Book:</strong> <em>${data.book.title}</em> - ${data.book.reason}</li>
+                    <li><strong>Album:</strong> <em>${data.album.title}</em> - ${data.album.reason}</li>
+                </ul>
+                <h4 class="font-semibold text-sm mt-3 text-gray-800">Travel Pitch</h4>
+                <p class="text-sm text-gray-600">${data.pitch}</p>
+            `;
+            aiContentDiv.innerHTML = newHtml;
         }
     } catch (error) {
         console.error('Failed to fetch AI guide:', error);
@@ -143,6 +160,28 @@ async function fetchAiGuide(movie) {
         }
     }
 }
+
+// // For Google Hackathon
+// async function fetchAiGuide(movie) {
+//     try {
+//         const response = await fetch('/getAiTourGuide', {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify({ title: movie.title, location: movie.filmingLocation }),
+//         });
+    //     if (!response.ok) throw new Error('AI response not ok');
+    //     const data = await response.json();
+    //     const aiContentDiv = document.getElementById('ai-content');
+    //     if (aiContentDiv) {
+    //         aiContentDiv.innerHTML = `<p class="text-sm text-gray-800">${data.tourGuideText}</p>`;
+    //     }
+    // } catch (error) {
+    //     console.error('Failed to fetch AI guide:', error);
+    //     const aiContentDiv = document.getElementById('ai-content');
+    //     if (aiContentDiv) {
+    //         aiContentDiv.innerHTML = `<p class="text-sm text-red-500">Could not generate tour.</p>`;
+    //     }
+    // }
 
 
 // --- Modal Logic ---

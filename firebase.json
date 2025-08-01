@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "target": "flickyplots",
     "public": "public",
     "ignore": [
       "firebase.json",

@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "flickyplots"
-  }
+  },
+  "targets": {
+    "flickyplots": {
+      "hosting": {
+        "flickyplots": [
+          "flickyplots"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
