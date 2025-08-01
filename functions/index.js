@@ -14,45 +14,69 @@ const SERVICE_ACCOUNT_EMAIL = "flickyplots-runner@flickyplots.iam.gserviceaccoun
 
 // --- Cloud Functions ---
 
-//Options object is the first argument
-exports.getQloo = functions.https.onRequest({ serviceAccount: SERVICE_ACCOUNT_EMAIL }, (request, response) => {
+// For Zombies
+exports.getApocalypseMovies = functions.https.onRequest({ serviceAccount: SERVICE_ACCOUNT_EMAIL }, (request, response) => {
   cors(request, response, async () => {
     try {
       const qlooRequestBody = {
-        filter: {
-          type: "urn:entity:movie",
-          geocode: { country_code: "US" },
-        },
-        limit: 25,
+        "query": {
+            "domain": "entity",
+            "query": [{
+                "type": "qloo-taste",
+                "search_term": "zombie apocalypse movies",
+                "result_entity_type": "movie"
+            }],
+            "limit": 50
+        }
       };
-      const apiResponse = await axios.post(
-        `${qlooApiUrl.value()}/v2/insights`,
-        qlooRequestBody,
-        { headers: { "Content-Type": "application/json", "x-api-key": qlooApiKey.value() } }
-      );
-      // For Qloo Hackathon
-      const cleanedData = apiResponse.data.results.entities.map((movie) => ({
-    title: movie.name,
-    filmingLocation: movie.properties.filming_location,
-    releaseYear: movie.properties.release_year, // Make sure this is here
-    description: movie.properties.description,
-    imageUrl: movie.properties.image?.url,
-}));
-      // For Google Hackathon
-      // const cleanedData = apiResponse.data.results.entities.map((movie) => ({
-      //   title: movie.name,
-      //   filmingLocation: movie.properties.filming_location,
-      //   releaseYear: movie.properties.release_year,
-      //   description: movie.properties.description,
-      //   imageUrl: movie.properties.image?.url,
-      // }));
+      const apiResponse = await axios.post(/* ... */); // (The rest of the axios call is the same as getQloo)
+      const cleanedData = apiResponse.data.results.entities.map(/* ... */); // (Data cleaning is the same)
       response.status(200).send(cleanedData);
     } catch (error) {
-      console.error("Error in getQloo:", error.response?.data || error.message);
+      console.error("Error in getApocalypseMovies:", error.response?.data || error.message);
       response.status(500).send("Something went wrong!");
     }
   });
 });
+//Options object is the first argument (getQloo)
+// exports.getQloo = functions.https.onRequest({ serviceAccount: SERVICE_ACCOUNT_EMAIL }, (request, response) => {
+//   cors(request, response, async () => {
+//     try {
+//       const qlooRequestBody = {
+//         filter: {
+//           type: "urn:entity:movie",
+//           geocode: { country_code: "US" },
+//         },
+//         limit: 25,
+//       };
+//       const apiResponse = await axios.post(
+//         `${qlooApiUrl.value()}/v2/insights`,
+//         qlooRequestBody,
+//         { headers: { "Content-Type": "application/json", "x-api-key": qlooApiKey.value() } }
+//       );
+//       // For Qloo Hackathon
+//       const cleanedData = apiResponse.data.results.entities.map((movie) => ({
+//     title: movie.name,
+//     filmingLocation: movie.properties.filming_location,
+//     releaseYear: movie.properties.release_year, // Make sure this is here
+//     description: movie.properties.description,
+//     imageUrl: movie.properties.image?.url,
+// }));
+//       // For Google Hackathon
+//       // const cleanedData = apiResponse.data.results.entities.map((movie) => ({
+//       //   title: movie.name,
+//       //   filmingLocation: movie.properties.filming_location,
+//       //   releaseYear: movie.properties.release_year,
+//       //   description: movie.properties.description,
+//       //   imageUrl: movie.properties.image?.url,
+//       // }));
+//       response.status(200).send(cleanedData);
+//     } catch (error) {
+//       console.error("Error in getQloo:", error.response?.data || error.message);
+//       response.status(500).send("Something went wrong!");
+//     }
+//   });
+// });
 
 // For Qloo Hackathon
 

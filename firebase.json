@@ -18,13 +18,6 @@
         { "source": "/getAiTourGuide", "function": "getAiTourGuide" }
       ]
     },
-
-       {
-      "target": "apocalypse",
-      "public": "public",
-      "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
-      "rewrites": []
-    },
     {
       "target": "apocalypse",
       "public": "public",
