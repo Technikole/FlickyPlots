@@ -26,16 +26,27 @@ exports.getApocalypseMovies = functions.https.onRequest({ serviceAccount: SERVIC
                 "search_term": "zombie apocalypse movies",
                 "result_entity_type": "movie"
             }],
-            "limit": 50
+            "limit": 50,
         }
       };
-      const apiResponse = await axios.post(/* ... */); // (The rest of the axios call is the same as getQloo)
-      const cleanedData = apiResponse.data.results.entities.map(/* ... */); // (Data cleaning is the same)
-      response.status(200).send(cleanedData);
+       const apiResponse = await axios.post(
+        `${qlooApiUrl.value()}/v2/insights`,
+        qlooRequestBody,
+        { headers: { "Content-Type": "application/json", "x-api-key": qlooApiKey.value() } }
+      );
+      // For Qloo Hackathon
+      const cleanedData = apiResponse.data.results.entities.map((movie) => ({
+    title: movie.name,
+    filmingLocation: movie.properties.filming_location,
+    releaseYear: movie.properties.release_year, // Make sure this is here
+    description: movie.properties.description,
+    imageUrl: movie.properties.image?.url,
+}));
+    response.status(200).send(cleanedData);
     } catch (error) {
       console.error("Error in getApocalypseMovies:", error.response?.data || error.message);
       response.status(500).send("Something went wrong!");
-    }
+    } 
   });
 });
 //Options object is the first argument (getQloo)
@@ -82,42 +93,42 @@ exports.getApocalypseMovies = functions.https.onRequest({ serviceAccount: SERVIC
 
 // Option 3 - Adjusted
 
-exports.getAiTourGuide = functions.https.onRequest({ serviceAccount: SERVICE_ACCOUNT_EMAIL }, (request, response) => {
-  cors(request, response, async () => {
-    try {
-      if (request.method !== 'POST') {
-        return response.status(405).send('Method Not Allowed');
-      }
+// exports.getAiTourGuide = functions.https.onRequest({ serviceAccount: SERVICE_ACCOUNT_EMAIL }, (request, response) => {
+//   cors(request, response, async () => {
+//     try {
+//       if (request.method !== 'POST') {
+//         return response.status(405).send('Method Not Allowed');
+//       }
       
-      const { title, location, releaseYear } = request.body;
-      if (!title || !location) {
-        return response.status(400).send("Missing title or location.");
-      }
+//       const { title, location, releaseYear } = request.body;
+//       if (!title || !location) {
+//         return response.status(400).send("Missing title or location.");
+//       }
 
-      const genAI = new GoogleGenerativeAI(geminiApiKey.value());
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
+//       const genAI = new GoogleGenerativeAI(geminiApiKey.value());
+//       const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
 
-      const prompt = `You are a cultural recommender. For the movie '${title}' (${releaseYear}), filmed in '${location}', generate a JSON object with three keys: "book", "album", and "pitch".
-        - The "book" value should be an object with "title" and "reason" keys for a thematically similar book.
-        - The "album" value should be an object with "title" and "reason" keys for a similar album.
-        - The "pitch" value should be a string containing a creative 2-3 sentence travel pitch for the location.
-        Ensure the output is ONLY the raw JSON object, with no other text or markdown.`;
+//       const prompt = `You are a cultural recommender. For the movie '${title}' (${releaseYear}), filmed in '${location}', generate a JSON object with three keys: "book", "album", and "pitch".
+//         - The "book" value should be an object with "title" and "reason" keys for a thematically similar book.
+//         - The "album" value should be an object with "title" and "reason" keys for a similar album.
+//         - The "pitch" value should be a string containing a creative 2-3 sentence travel pitch for the location.
+//         Ensure the output is ONLY the raw JSON object, with no other text or markdown.`;
 
-      const result = await model.generateContent(prompt);
-      let text = result.response.text();
+//       const result = await model.generateContent(prompt);
+//       let text = result.response.text();
       
-      // THE FIX: Clean the response to remove markdown backticks
-      text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+//       // THE FIX: Clean the response to remove markdown backticks
+//       text = text.replace(/```json/g, '').replace(/```/g, '').trim();
 
-      const jsonData = JSON.parse(text);
-      response.status(200).send(jsonData);
+//       const jsonData = JSON.parse(text);
+//       response.status(200).send(jsonData);
 
-    } catch (error) {
-      console.error("Error in getAiTourGuide:", error);
-      response.status(500).send("Failed to generate AI content.");
-    }
-  });
-});
+//     } catch (error) {
+//       console.error("Error in getAiTourGuide:", error);
+//       response.status(500).send("Failed to generate AI content.");
+//     }
+//   });
+// });
 
 // //Option 2 - Formatted
 
