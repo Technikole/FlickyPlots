@@ -1,23 +1,24 @@
 {
-  "hosting": {
-    "target": "flickyplots",
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "/getQloo",
-        "function": "getQloo"
-      },
-        {
-    "source": "/getAiTourGuide",
-    "function": "getAiTourGuide"
-  }
-    ]
-  },
+  "hosting": [
+    {
+      "target": "flickyplots",
+      "public": "public",
+      "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
+      "rewrites": [
+        { "source": "/getQloo", "function": "getQloo" },
+        { "source": "/getAiTourGuide", "function": "getAiTourGuide" }
+      ]
+    },
+    {
+      "target": "qloo-site",
+      "public": "public",
+      "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
+      "rewrites": [
+        { "source": "/getQloo", "function": "getQloo" },
+        { "source": "/getAiTourGuide", "function": "getAiTourGuide" }
+      ]
+    }
+  ],
   "functions": {
     "source": "functions",
     "codebase": "default",
