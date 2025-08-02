@@ -23,7 +23,8 @@
       "public": "public",
       "ignore": [ "firebase.json", "**/.*", "**/node_modules/**" ],
       "rewrites": [
-        { "source": "/getApocalypseMovies", "function": "getApocalypseMovies" },
+        // { "source": "/getApocalypseMovies", "function": "getApocalypseMovies" },
+        { "source": "/getMovies", "function": "getMovies" },
         { "source": "/getAiTourGuide", "function": "getAiTourGuide" } 
       ]
     }

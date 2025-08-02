@@ -8,7 +8,8 @@
     "start": "npm run shell",
     "deploy": "firebase deploy --only hosting,functions",
     "logs": "firebase functions:log",
-    "zombies": "firebase deploy --only hosting:apocalypse,functions"
+    "zombies": "firebase deploy --only hosting:apocalypse,functions",
+    "devz": "firebase emulators:start --only hosting:apocalypse,functions"
   },
   "engines": {
     "node": "22"

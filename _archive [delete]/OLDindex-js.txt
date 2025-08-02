@@ -1,0 +1,304 @@
+const functions = require("firebase-functions");
+const axios = require("axios");
+const cors = require("cors")({ origin: true });
+const { defineString } = require("firebase-functions/params");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+// --- API Key Definitions ---
+const qlooApiKey = defineString("QLOO_API_KEY");
+const qlooApiUrl = defineString("QLOO_API_URL");
+const geminiApiKey = defineString("GEMINI_API_KEY");
+
+// --- Service Account Email ---
+const SERVICE_ACCOUNT_EMAIL = "flickyplots-runner@flickyplots.iam.gserviceaccount.com";
+
+// --- Cloud Functions ---
+
+// For Zombies 
+// zv3
+exports.getApocalypseMovies = functions.https.onRequest({ serviceAccount: SERVICE_ACCOUNT_EMAIL }, (request, response) => {
+  cors(request, response, async () => {
+    try {
+     const qlooRequestBody = {
+        "filter": {
+          type: "urn:entity:movie",
+          geocode: { country_code: "US"},
+        },
+        "query": {
+          "domain": "entity",
+          "query": [{
+            "type": "qloo-taste",
+            "search_term": "zombie apocalypse movies"
+          }]
+        },
+        "limit": 50
+      };
+
+      // THIS IS THE MISSING LINE THAT MAKES THE API CALL
+      const apiResponse = await axios.post(
+        `${qlooApiUrl.value()}/v2/insights`,
+        qlooRequestBody,
+        { headers: { "Content-Type": "application/json", "x-api-key": qlooApiKey.value() } }
+      );
+
+      const cleanedData = apiResponse.data.results.entities.map((movie) => ({
+        title: movie.name,
+        filmingLocation: movie.properties.filming_location,
+        releaseYear: movie.properties.release_year,
+        description: movie.properties.description,
+        imageUrl: movie.properties.image?.url,
+      }));
+
+      response.status(200).send(cleanedData);
+
+    } catch (error) {
+      console.error("Error in getApocalypseMovies:", error.response?.data || error.message);
+      response.status(500).send("Something went wrong!");
+    }
+  });
+});
+// zv2
+
+// exports.getApocalypseMovies = functions.https.onRequest({ serviceAccount: SERVICE_ACCOUNT_EMAIL }, (request, response) => {
+//   cors(request, response, async () => {
+//     try {
+//       const qlooRequestBody = {
+//         // We provide the filter that the API requires...
+//         "filter": {
+//           "type": "urn:entity:movie"
+//         },
+//         // ...AND the taste-based query to get our theme.
+//         "query": {
+//           "domain": "entity",
+//           "query": [{
+//             "type": "qloo-taste",
+//             "search_term": "zombie apocalypse movies"
+//             // "result_entity_type" is removed here to avoid conflict with the main filter
+//           }]
+//         },
+//         "limit": 50
+//       };
+// zv1
+// exports.getApocalypseMovies = functions.https.onRequest({ serviceAccount: SERVICE_ACCOUNT_EMAIL }, (request, response) => {
+//   cors(request, response, async () => {
+//     try {
+//       const apiResponse = await axios.get(
+//         `${qlooApiUrl.value()}/search`,
+//         {
+//           headers: { "x-api-key": qlooApiKey.value() },
+//           // We pass the search terms as URL parameters
+//           params: {
+//             q: "zombie apocalypse movies",
+//             type: "movie",
+//             limit: 50
+//           }
+//         }
+//       );
+        // Can't use filter + query, trying for search (see above)
+    // "filter": {
+    //         "type": "urn:entity:movie"
+    //     },
+    //     "query": {
+    //         "domain": "entity",
+    //         "query": [{
+    //             "type": "qloo-taste",
+    //             "search_term": "zombie apocalypse movies",
+    //             "result_entity_type": "movie"
+    //         }]
+    //     },
+    //     "limit": 50
+    //   };
+
+      // For Qloo Hackathon
+
+//       const cleanedData = apiResponse.data.results.entities.map((movie) => ({
+//         title: movie.name,
+//         filmingLocation: movie.properties.filming_location,
+//         releaseYear: movie.properties.release_year,
+//         description: movie.properties.description,
+//         imageUrl: movie.properties.image?.url,
+//       }));
+
+//       response.status(200).send(cleanedData);
+
+//     } catch (error) {
+//       console.error("Error in getApocalypseMovies:", error.response?.data || error.message);
+//       response.status(500).send("Something went wrong!");
+//     }
+//   });
+// });
+//Options object is the first argument (getQloo)
+// exports.getQloo = functions.https.onRequest({ serviceAccount: SERVICE_ACCOUNT_EMAIL }, (request, response) => {
+//   cors(request, response, async () => {
+//     try {
+//       const qlooRequestBody = {
+//         filter: {
+//           type: "urn:entity:movie",
+//           geocode: { country_code: "US" },
+//         },
+//         limit: 25,
+//       };
+//       const apiResponse = await axios.post(
+//         `${qlooApiUrl.value()}/v2/insights`,
+//         qlooRequestBody,
+//         { headers: { "Content-Type": "application/json", "x-api-key": qlooApiKey.value() } }
+//       );
+//       // For Qloo Hackathon
+//       const cleanedData = apiResponse.data.results.entities.map((movie) => ({
+//     title: movie.name,
+//     filmingLocation: movie.properties.filming_location,
+//     releaseYear: movie.properties.release_year, // Make sure this is here
+//     description: movie.properties.description,
+//     imageUrl: movie.properties.image?.url,
+// }));
+//       // For Google Hackathon
+//       // const cleanedData = apiResponse.data.results.entities.map((movie) => ({
+//       //   title: movie.name,
+//       //   filmingLocation: movie.properties.filming_location,
+//       //   releaseYear: movie.properties.release_year,
+//       //   description: movie.properties.description,
+//       //   imageUrl: movie.properties.image?.url,
+//       // }));
+//       response.status(200).send(cleanedData);
+//     } catch (error) {
+//       console.error("Error in getQloo:", error.response?.data || error.message);
+//       response.status(500).send("Something went wrong!");
+//     }
+//   });
+// });
+
+// For Qloo Hackathon
+
+// Option 3 - Adjusted
+
+// exports.getAiTourGuide = functions.https.onRequest({ serviceAccount: SERVICE_ACCOUNT_EMAIL }, (request, response) => {
+//   cors(request, response, async () => {
+//     try {
+//       if (request.method !== 'POST') {
+//         return response.status(405).send('Method Not Allowed');
+//       }
+      
+//       const { title, location, releaseYear } = request.body;
+//       if (!title || !location) {
+//         return response.status(400).send("Missing title or location.");
+//       }
+
+//       const genAI = new GoogleGenerativeAI(geminiApiKey.value());
+//       const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
+
+//       const prompt = `You are a cultural recommender. For the movie '${title}' (${releaseYear}), filmed in '${location}', generate a JSON object with three keys: "book", "album", and "pitch".
+//         - The "book" value should be an object with "title" and "reason" keys for a thematically similar book.
+//         - The "album" value should be an object with "title" and "reason" keys for a similar album.
+//         - The "pitch" value should be a string containing a creative 2-3 sentence travel pitch for the location.
+//         Ensure the output is ONLY the raw JSON object, with no other text or markdown.`;
+
+//       const result = await model.generateContent(prompt);
+//       let text = result.response.text();
+      
+//       // THE FIX: Clean the response to remove markdown backticks
+//       text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+
+//       const jsonData = JSON.parse(text);
+//       response.status(200).send(jsonData);
+
+//     } catch (error) {
+//       console.error("Error in getAiTourGuide:", error);
+//       response.status(500).send("Failed to generate AI content.");
+//     }
+//   });
+// });
+
+// //Option 2 - Formatted
+
+
+// exports.getAiTourGuide = functions.https.onRequest({ serviceAccount: SERVICE_ACCOUNT_EMAIL }, (request, response) => {
+//   cors(request, response, async () => {
+//     try {
+//       if (request.method !== 'POST') {
+//         return response.status(405).send('Method Not Allowed');
+//       }
+      
+//       const { title, location, releaseYear } = request.body;
+//       if (!title || !location) {
+//         return response.status(400).send("Missing title or location.");
+//       }
+
+//       const genAI = new GoogleGenerativeAI(geminiApiKey.value());
+//       const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
+
+//       // NEW PROMPT: Ask for a JSON response
+//       const prompt = `You are a cultural recommender. For the movie '${title}' (${releaseYear}), filmed in '${location}', generate a JSON object with three keys: "book", "album", and "pitch".
+//         - The "book" value should be an object with "title" and "reason" keys for a thematically similar book.
+//         - The "album" value should be an object with "title" and "reason" keys for a similar album.
+//         - The "pitch" value should be a string containing a creative 2-3 sentence travel pitch for the location.
+//         Ensure the output is only a valid JSON object.`;
+
+//       const result = await model.generateContent(prompt);
+//       const text = result.response.text();
+      
+//       // Parse the JSON string from the AI
+//       const jsonData = JSON.parse(text);
+
+//       response.status(200).send(jsonData);
+
+//     } catch (error) {
+//       console.error("Error in getAiTourGuide:", error);
+//       response.status(500).send("Failed to generate AI content.");
+//     }
+//   });
+// });
+// Option 1 - bad styling
+// exports.getAiTourGuide = functions.https.onRequest({ serviceAccount: SERVICE_ACCOUNT_EMAIL }, (request, response) => {
+//   cors(request, response, async () => {
+//     try {
+//       if (request.method !== 'POST') {
+//         return response.status(405).send('Method Not Allowed');
+//       }
+//       const { title, location, releaseYear } = request.body;
+//       if (!title || !location) {
+//         return response.status(400).send("Missing title or location.");
+//       }
+
+//       const genAI = new GoogleGenerativeAI(geminiApiKey.value());
+//       const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
+
+//       // NEW, MORE ADVANCED PROMPT FOR QLOO
+//       const prompt = `You are a personalized travel and culture recommender powered by Qloo. A user is interested in the movie '${title}' (${releaseYear}), filmed in '${location}'. 
+//       1. Based on the themes of this movie, suggest one thematically similar book to read and one album to listen to.
+//       2. In a new paragraph, write a creative pitch explaining why '${location}' is the perfect travel destination for someone who loves this kind of culture.
+//       Keep it concise and exciting.`;
+
+//       const result = await model.generateContent(prompt);
+//       const text = result.response.text();
+//       response.status(200).send({ tourGuideText: text });
+//     } catch (error) {
+//       console.error("Error in getAiTourGuide:", error);
+//       response.status(500).send("Failed to generate AI content.");
+//     }
+//   });
+// });
+
+// For Google Maps Hackathon
+
+// exports.getAiTourGuide = functions.https.onRequest({ serviceAccount: SERVICE_ACCOUNT_EMAIL }, (request, response) => {
+//   cors(request, response, async () => {
+//     try {
+//       if (request.method !== 'POST') {
+//         return response.status(405).send('Method Not Allowed');
+//       }
+//       const { title, location } = request.body;
+//       if (!title || !location) {
+//         return response.status(400).send("Missing title or location.");
+//       }
+//       const genAI = new GoogleGenerativeAI(geminiApiKey.value());
+//       const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
+//       const prompt = `Act as a creative movie tour guide. For the movie '${title}', filmed in '${location}', generate a short, imaginative tour pitch (2-3 sentences) for a tourist visiting that spot today. Make it sound intriguing, cinematic, and describe what the visitor might experience now — blending the movie’s atmosphere with the present-day setting.`;
+//       const result = await model.generateContent(prompt);
+//       const text = result.response.text();
+//       response.status(200).send({ tourGuideText: text });
+//     } catch (error) {
+//       console.error("Error in getAiTourGuide:", error);
+//       response.status(500).send("Failed to generate AI content.");
+//     }
+//   });
+// });
